@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FileUpload;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -60,3 +61,6 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 Route::resource('/dashboard/users', DashboardUsersController::class)->middleware('auth');
+
+Route::get('dashboard/upload-file', [FileUpload::class, 'createForm']);
+Route::post('dashboard/upload-file', [FileUpload::class, 'fileUpload'])->name('fileUpload');
