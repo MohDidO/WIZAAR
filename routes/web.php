@@ -64,3 +64,4 @@ Route::resource('/dashboard/users', DashboardUsersController::class)->middleware
 
 Route::get('dashboard/upload-file', [FileUpload::class, 'createForm']);
 Route::post('dashboard/upload-file', [FileUpload::class, 'fileUpload'])->name('fileUpload');
+
