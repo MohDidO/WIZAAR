@@ -60,73 +60,28 @@
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th class="border-bottom" scope="col">Course</th>
-                                    <th class="border-bottom" scope="col">Content</th>
-                                    <th class="border-bottom" scope="col">Kelas</th>
-                                
+                                    <th class="border-bottom" scope="col">#</th>
+                                    <th class="border-bottom" scope="col">Nama Pelajaran</th>
+                                    <th class="border-bottom" scope="col">Kategori</th>
+                                    <th class="border-bottom" scope="col">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th class="text-gray-900" scope="row">
-                                        sholat ygy
-                                    </th>
-                                    <td class="fw-bolder text-gray-500">
-                                        3,225
-                                    </td>
-                                    <td class="fw-bolder text-gray-500">
-                                        $20
-                                    </td>
-                                
-                                </tr>
-                                <tr>
-                                    <th class="text-gray-900" scope="row">
-                                        sudah kah anda sholat
-                                    </th>
-                                    <td class="fw-bolder text-gray-500">
-                                        2,987
-                                    </td>
-                                    <td class="fw-bolder text-gray-500">
-                                        0
-                                    </td>
-                                
-                                </tr>
-                                <tr>
-                                    <th class="text-gray-900" scope="row">
-                                        sholat lah
-                                    </th>
-                                    <td class="fw-bolder text-gray-500">
-                                        2,844
-                                    </td>
-                                    <td class="fw-bolder text-gray-500">
-                                    294
-                                    </td>
+                                    @foreach($pelajarans as $pelajaran)
+                                    <tr>
+                                        <th class="text-gray-900" scope="row">
+                                            {{ $loop->iteration }}
+                                        </th>
+                                        <td class="fw-bolder text-gray-500">
+                                            {{ $pelajaran->{"nama pelajaran"} }}
+                                        </td>
+                                        <td class="fw-bolder text-gray-500">
+                                            {{ $pelajaran->kategori->nama }}
+                                        </td>
                                     
-                                </tr>
-                                <tr>
-                                    <th class="text-gray-900" scope="row">
-                                        haya sholat
-                                    </th>
-                                    <td class="fw-bolder text-gray-500">
-                                        2,050
-                                    </td>
-                                    <td class="fw-bolder text-gray-500">
-                                        $147
-                                    </td>
+                                    </tr>  
+                                    @endforeach
                                 
-                                </tr>
-                                <tr>
-                                    <th class="text-gray-900" scope="row">
-                                        sholat skuy
-                                    </th>
-                                    <td class="fw-bolder text-gray-500">
-                                        1,483
-                                    </td>
-                                    <td class="fw-bolder text-gray-500">
-                                        $19
-                                    </td>
-                                
-                                </tr>
                                 </tbody>
                             </table>
                         </div>

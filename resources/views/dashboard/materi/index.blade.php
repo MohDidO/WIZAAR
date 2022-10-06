@@ -8,9 +8,9 @@
                           New Task
                       </button>
                       <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
-                          <a class="dropdown-item d-flex align-items-center" href="#">
+                          <a class="dropdown-item d-flex align-items-center" href="/dashboard/materis/create">
                               <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path></svg>
-                              Add User
+                              Tambah Materi
                           </a>
                           <a class="dropdown-item d-flex align-items-center" href="#">
                               <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>                            
@@ -38,7 +38,7 @@
             <div class="card bg-yellow-100 border-0 shadow">
                 <div class="card-header d-sm-flex flex-row align-items-center flex-0">
                     <div class="d-block mb-3 mb-sm-0">
-                        <h2 class="fs-3 fw-extrabold"> (Nama Pelajaran)* </h2>
+                        <h2 class="fs-3 fw-extrabold"> Courses Information </h2>
                     </div>
                 </div>
         </div>
@@ -51,82 +51,69 @@
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h2 class="fs-5 fw-bold mb-0">Course Information</h2>
+                                    <h2 class="fs-5 fw-bold mb-0">Cari Pelajaran</h2>
                                 </div>
                             
                             </div>
                         </div>
+
+                        @if(session()-> has('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                          @endif
                         <div class="table-responsive">
+                            <form action="dashboard/materis" method="get">
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <svg class="icon icon-xs text-gray-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>  
+                                    </span>
+                                    <input type="search" class="form-control" id="exampleInputIconLeft" placeholder="Search" name="search" aria-label="Search">
+                                </div>
+                            </form>
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                 <tr>
-                                    <th class="border-bottom" scope="col">Course</th>
-                                    <th class="border-bottom" scope="col">Content</th>
-                                    <th class="border-bottom" scope="col">Kelas</th>
-                                
+                                    <th class="border-bottom" scope="col">#</th>
+                                    <th class="border-bottom" scope="col">Nama Materi</th>
+                                    <th class="border-bottom" scope="col">Nama Pelajaran</th>
+                                    <th class="border-bottom" scope="col">File</th>
+                                    <th class="border-bottom" scope="col">Action</th>
+    
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th class="text-gray-900" scope="row">
-                                        sholat ygy
-                                    </th>
-                                    <td class="fw-bolder text-gray-500">
-                                        3,225
-                                    </td>
-                                    <td class="fw-bolder text-gray-500">
-                                        $20
-                                    </td>
-                                
-                                </tr>
-                                <tr>
-                                    <th class="text-gray-900" scope="row">
-                                        sudah kah anda sholat
-                                    </th>
-                                    <td class="fw-bolder text-gray-500">
-                                        2,987
-                                    </td>
-                                    <td class="fw-bolder text-gray-500">
-                                        0
-                                    </td>
-                                
-                                </tr>
-                                <tr>
-                                    <th class="text-gray-900" scope="row">
-                                        sholat lah
-                                    </th>
-                                    <td class="fw-bolder text-gray-500">
-                                        2,844
-                                    </td>
-                                    <td class="fw-bolder text-gray-500">
-                                    294
-                                    </td>
+                                    @foreach ($materis as $materi)
+                                    <tr>
+                                        <th class="text-gray-900" scope="row">
+                                            {{ $loop->iteration }}
+                                        </th>
+                                        <td class="fw-bolder text-gray-500">
+                                            {{ $materi->nama}}
+                                        </td>
+                                        <td class="fw-bolder text-gray-500">
+                                            {{ $materi->pelajaran->{'nama pelajaran'} }}
+                                        </td>
+                                        <td class="fw-bolder text-gray-500">
+                                            {{ $materi->{'file_path'} }}
+                                        </td>
+                                        <td class="">
+                                            
+                                            <a href="/dashboard/materis/{{ $materi->id }}" class="badge bg-info">Info</a>
+
+                                            <a href="/dashboard/materis/{{ $materi->id }}/edit" class="badge bg-warning">Edit</a>
+                                            
+                                            <form action="/dashboard/materis/{{ $materi->id }}" method="post" class="d-inline">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="badge bg-danger border-0  {{ $materi->id }}" onclick="return confirm ('Are you sure?')">Hapus</button>
+                                            </form>
+                                        </td>
                                     
-                                </tr>
-                                <tr>
-                                    <th class="text-gray-900" scope="row">
-                                        haya sholat
-                                    </th>
-                                    <td class="fw-bolder text-gray-500">
-                                        2,050
-                                    </td>
-                                    <td class="fw-bolder text-gray-500">
-                                        $147
-                                    </td>
+                                    </tr>  
+                                    @endforeach
                                 
-                                </tr>
-                                <tr>
-                                    <th class="text-gray-900" scope="row">
-                                        sholat skuy
-                                    </th>
-                                    <td class="fw-bolder text-gray-500">
-                                        1,483
-                                    </td>
-                                    <td class="fw-bolder text-gray-500">
-                                        $19
-                                    </td>
-                                
-                                </tr>
                                 </tbody>
                             </table>
                         </div>
