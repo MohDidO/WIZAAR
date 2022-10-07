@@ -34,24 +34,24 @@
               </div>
 
     <div class="row">
-        <div class="col-12 mb-4">
+        <div class="col-12 mb-4 ">
             <div class="card bg-yellow-100 border-0 shadow">
                 <div class="card-header d-sm-flex flex-row align-items-center flex-0">
                     <div class="d-block mb-3 mb-sm-0">
-                        <h2 class="fs-3 fw-extrabold"> Courses Information </h2>
+                        <h2 class="fs-3 fw-extrabold"> Materi </h2>
                     </div>
                 </div>
         </div>
         </div>
     <div class="row">
-        <div class="col-12 col-xl-8">
+        <div class="col-12 col-xl-10">
             <div class="row">
                 <div class="col-12 mb-4">
                     <div class="card border-0 shadow">
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h2 class="fs-5 fw-bold mb-0">Cari Pelajaran</h2>
+                                    <h2 class="fs-5 fw-bold mb-0">Cari Materi</h2>
                                 </div>
                             
                             </div>
@@ -93,7 +93,7 @@
                                             {{ $materi->nama}}
                                         </td>
                                         <td class="fw-bolder text-gray-500">
-                                            {{ $materi->pelajaran->{'nama pelajaran'} }}
+                                            {{ $materi->pelajaran->nama }}
                                         </td>
                                         <td class="fw-bolder text-gray-500">
                                             {{ $materi->{'file_path'} }}

@@ -8,9 +8,9 @@
                           New Task
                       </button>
                       <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
-                          <a class="dropdown-item d-flex align-items-center" href="#">
+                          <a class="dropdown-item d-flex align-items-center" href="pelajarans/create/">
                               <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"></path></svg>
-                              Add User
+                              Tambah Pelajaran
                           </a>
                           <a class="dropdown-item d-flex align-items-center" href="#">
                               <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path></svg>                            
@@ -38,7 +38,7 @@
             <div class="card bg-yellow-100 border-0 shadow">
                 <div class="card-header d-sm-flex flex-row align-items-center flex-0">
                     <div class="d-block mb-3 mb-sm-0">
-                        <h2 class="fs-3 fw-extrabold"> (Nama Pelajaran)* </h2>
+                        <h2 class="fs-3 fw-extrabold"> Pelajaran </h2>
                     </div>
                 </div>
         </div>
@@ -73,12 +73,23 @@
                                             {{ $loop->iteration }}
                                         </th>
                                         <td class="fw-bolder text-gray-500">
-                                            {{ $pelajaran->{"nama pelajaran"} }}
+                                            {{ $pelajaran->nama }}
                                         </td>
                                         <td class="fw-bolder text-gray-500">
                                             {{ $pelajaran->kategori->nama }}
                                         </td>
-                                    
+                                        <td class="">
+                                            
+                                            <a href="/dashboard/pelajarans/{{ $pelajaran->id }}" class="badge bg-info">Info</a>
+
+                                            <a href="/dashboard/pelajarans/{{ $pelajaran->id }}/edit" class="badge bg-warning">Edit</a>
+                                            
+                                            <form action="/dashboard/pelajarans/{{ $pelajaran->id }}" method="post" class="d-inline">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="badge bg-danger border-0  {{ $pelajaran->id }}" onclick="return confirm ('Are you sure?')">Hapus</button>
+                                            </form>
+                                        </td>
                                     </tr>  
                                     @endforeach
                                 

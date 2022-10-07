@@ -34,9 +34,9 @@
                                         <option selected>Open this select menu</option>
                                         @foreach ($pelajarans as $pelajarans)
                                             @if(old('id_pelajaran', $materi->id_pelajaran == $pelajarans->id))
-                                                <option value="{{ $pelajarans->id }}" selected>{{ $pelajarans->{'nama pelajaran'} }}</option>
+                                                <option value="{{ $pelajarans->id }}" selected>{{ $pelajarans->nama }}</option>
                                             @else
-                                                <option value="{{ $pelajarans->id }}">{{ $pelajarans->{'nama pelajaran'} }}</option>
+                                                <option value="{{ $pelajarans->id }}">{{ $pelajarans->nama }}</option>
                                             @endif
                                         @endforeach
                                     </select>
@@ -52,7 +52,9 @@
                                 </div>
                                 <!-- End of Form -->
                                 <button class="btn btn-primary" type="submit">Submit</button> 
-
+                                <tfoot>
+                                    <select data-columns='0' name="filter" id=""></select>
+                                </tfoot>
                             </form>
                         </div>
                     </div>

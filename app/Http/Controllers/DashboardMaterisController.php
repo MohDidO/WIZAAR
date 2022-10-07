@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Materi;
 use Illuminate\Http\Request;
 use App\Models\Pelajaran;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Response;
 
 class DashboardMaterisController extends Controller
 {
@@ -55,8 +57,6 @@ class DashboardMaterisController extends Controller
             'id_pelajaran' => 'required',
             'file' => 'required|mimes:csv,txt,xlx,xls,pdf|max:20480'
         ]);
-        
-        $path = $request->file->store('/public/files');
  
  
         $save = new Materi;
@@ -64,8 +64,9 @@ class DashboardMaterisController extends Controller
         $save->nama = request('nama');
         $save->id_pelajaran = request('id_pelajaran');
         $fileName = time().'_'.$request->file->getClientOriginalName();
-        $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
-        $save->file_path = '/storage/' . $filePath;
+        $filePath = $request->file('file')->storeAs('uploads', $fileName);
+        // $save->file_path = '/storage/' . $filePath;
+        $save->file_path =  $filePath;
         $save->save();
 
 
@@ -82,7 +83,16 @@ class DashboardMaterisController extends Controller
      */
     public function show(Materi $materi)
     {
-        //
+        // return view('dashboard.materi.show', [
+        //     'materi' => $materi,
+        //     'url' => Storage::url('1665053949_Week 2 DM2.pdf')
+        // ]);
+        
+        // return response()->file('storage/' . $materi->file_path);
+        // return response()->download(storage_path($materi->file_path));
+        return response()->file(storage_path('app\\'. $materi->file_path));
+            
+            
     }
 
     /**
@@ -122,9 +132,11 @@ class DashboardMaterisController extends Controller
         $save->nama = request('nama');
         $save->id_pelajaran = request('id_pelajaran');
         $fileName = time().'_'.$request->file->getClientOriginalName();
-        $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
-        $save->file_path = '/storage/' . $filePath;
+        // $filePath = $request->file('file')->storeAs('uploads', $fileName, 'public');
+        $filePath = $request->file('file')->storeAs('uploads', $fileName);
+        $save->file_path = $filePath;
         $save->save();
+        
 
 
 

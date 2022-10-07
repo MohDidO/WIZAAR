@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pelajaran;
 use Illuminate\Http\Request;
+use App\Models\Kategori;
 
 class DashboardPelajaransController extends Controller
 {
@@ -28,7 +29,9 @@ class DashboardPelajaransController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.pelajaran.create', [
+            'kategoris'=>Kategori::all()
+        ]);
     }
 
     /**
@@ -39,7 +42,14 @@ class DashboardPelajaransController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|max:255',
+            'id_kategori' => 'required'
+        ]);
+
+        Pelajaran::create($validatedData);
+
+        return redirect('/dashboard/pelajarans')->with('success', 'Pelajaran berhasil ditambahkan');
     }
 
     /**
@@ -61,7 +71,10 @@ class DashboardPelajaransController extends Controller
      */
     public function edit(Pelajaran $pelajaran)
     {
-        //
+        return view('dashboard.pelajaran.edit', [
+            'kategoris'=>Kategori::all(),
+            'pelajaran' => $pelajaran
+        ]);
     }
 
     /**
@@ -73,7 +86,14 @@ class DashboardPelajaransController extends Controller
      */
     public function update(Request $request, Pelajaran $pelajaran)
     {
-        //
+        $validatedData = $request->validate([
+            'nama' => 'required|max:255',
+            'id_kategori' => 'required'
+        ]);
+
+        Pelajaran::where('id_kategori', $pelajaran->id_kategori)->update($validatedData);
+
+        return redirect('/dashboard/pelajarans')->with('success', 'Pelajaran berhasil diupdate');
     }
 
     /**
@@ -84,6 +104,7 @@ class DashboardPelajaransController extends Controller
      */
     public function destroy(Pelajaran $pelajaran)
     {
-        //
+        Pelajaran::destroy($pelajaran -> id);
+        return redirect('dashboard/pelajarans')->with('success', 'Pelajaran terhapus!');
     }
 }
